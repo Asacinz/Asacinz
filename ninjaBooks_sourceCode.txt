@@ -1,0 +1,189 @@
+/**
+ Program to sort book order and display as if sitting on a bookshelf
+ **/
+package NinjaBooksSort;
+
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Arrays;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.border.TitledBorder;
+
+/**
+ * @author Asacinz
+ *
+ */
+public class bookSort extends JFrame{
+
+	/**
+	 * 
+	 */
+	public bookSort() {
+		
+	}
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		//String book1 = null;
+		
+		//int i = 0;
+		final String[] book = new String[5];
+		book[0] = "The Ninja Handbook                     ";
+		book[1] = "Real Ultimate Power: The Official Ninja";
+		book[2] = "Dragon Breath:2 Attack of the          ";
+		book[3] = "Ninja,Secrets of Invisibility          ";
+		book[4] = "Tao of Jeet Kun Do                     ";
+		//java.util.Arrays.sort(book);
+		
+		Arrays.sort(book);
+		
+		final char[] book2 = book[0].toCharArray();
+		final char[] book3 = book[1].toCharArray();
+		final char[] book4 = book[2].toCharArray();
+		final char[] book5 = book[3].toCharArray();
+		final char[] book6 = book[4].toCharArray();
+		
+		
+		JLabel lblBook1 = new JLabel(book[0].toString());
+		JLabel lblBook2 = new JLabel(book[1].toString());
+		JLabel lblBook3 = new JLabel(book[2].toString());
+		JLabel lblBook4 = new JLabel(book[3].toString());
+		JLabel lblBook5 = new JLabel(book[4].toString());
+		
+		
+		JPanel p = new JPanel();
+		p.setBorder(new TitledBorder("Ninja Book List:"));
+		p.setLayout(new GridLayout(5,1));
+		p.add(lblBook1);
+		p.add(lblBook2);
+		p.add(lblBook3);
+		p.add(lblBook4);
+		p.add(lblBook5);
+		
+		
+		JButton sort = new JButton("Sort");
+		JButton exit = new JButton("Exit");
+		
+		JPanel p2 = new JPanel();
+		p2.setLayout(new GridLayout(1,2));
+		p2.add(sort);
+		p2.add(exit);
+		
+		
+		sort.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				
+				try {
+					
+					
+					//FileWriter fw = new FileWriter("/home/shayne/Desktop/NinjaBooks.txt", false);
+					FileWriter fw = new FileWriter("C:\\NinjaSort.txt", false);
+					BufferedWriter out = new BufferedWriter(fw);
+					
+					for (int i = 0; i < book[1].length(); ++i){
+						
+						out.write(book2[i]);
+						out.write(" ");
+						out.write(" ");
+						out.write(book3[i]);
+						out.write(" ");
+						out.write(" ");
+						out.write(book4[i]);
+						out.write(" ");
+						out.write(" ");
+						out.write(book5[i]);
+						out.write(" ");
+						out.write(" ");
+						out.write(book6[i]);
+						out.newLine();
+						
+					
+					
+					}
+					out.close();
+					
+					String s;
+					//BufferedReader br = new BufferedReader(new FileReader("/home/shayne/Desktop/NinjaBooks.txt"));
+					BufferedReader br = new BufferedReader(new FileReader("C:\\NinjaSort.txt"));
+					final JTextArea ta = new JTextArea(350,600);
+					//FileReader fr = new FileReader("/home/shayne/Desktop/NinjaBooks.txt");
+					FileReader fr = new FileReader("C:\\NinjaSort.txt");
+					BufferedReader br2 = new BufferedReader(fr);
+					
+					ta.read(br2, null);
+					ta.requestFocus();
+					
+					JFrame frame = new JFrame();
+					frame.setSize(350,600);
+					frame.setTitle("Results");
+					frame.setLocation(100,50);
+					frame.add(ta);
+					
+					frame.setVisible(true);
+
+					
+					
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				JOptionPane.showMessageDialog(null, "Program creates file 'NinjaSort.txt' \n" +
+						"in location C:\\");
+				
+				
+			}
+		});
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		final JFrame f = new JFrame();
+		f.setTitle("Sort Books");
+		f.setSize(350,250);
+		f.setLayout(new GridLayout(2,1));
+		f.setLocation(250, 200);
+		f.add(p);
+		f.add(p2);
+		
+		f.setVisible(true);
+		
+		exit.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				f.dispose();
+				
+			}
+		});
+
+	}
+
+}
+
